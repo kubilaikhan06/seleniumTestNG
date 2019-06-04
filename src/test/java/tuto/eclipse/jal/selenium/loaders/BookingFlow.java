@@ -17,7 +17,13 @@ public class BookingFlow {
 		home.run();
 	}
 
+	protected void avaiPageRun() {
+		// TODO à ajouter à la classe Avai
+	}
+
 	protected void run() {
 		homePageRun();
+
+		avaiPageRun();
 	}
 }
