@@ -16,7 +16,7 @@ import tuto.eclipse.jal.selenium.ng.pageObjects.AvaiPageNG;
 import tuto.eclipse.jal.selenium.ng.pageObjects.HomePageNG;
 
 public class TestBookingNG {
-	private static final String PATH_CHROME_DRIVER = "C:\\Users\\formation\\Documents\\ChromeDrivers\\chromedriver.exe";
+	private static final String PATH_CHROME_DRIVER = "C:\\chromedriver_win32\\chromedriver.exe";
 	private static final String HOME_PAGE = "> HOME_PAGE > Checks > ";
 	private static final String EXPECTED_PAGE_TITLE = "JAPAN AIRLINES (JAL) - France Region - Airfare to Japan (Tokyo)";
 	private static final String WRONG_EXPECTED_PAGE_TITLE = "JAPAN AIRLINES (JL) - France Region - Airfare to Japan (Tokyo)";
@@ -31,29 +31,31 @@ public class TestBookingNG {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
-	
-	@Test(priority=0)
+
+	@Test(priority = 0)
 	public void verifyHomepageTitle() {
 		driver.get(JALConstants.JAL_HOME_PAGE);
 		String actualTitle = driver.getTitle();
 //		softAssert.assertEquals(actualTitle, WRONG_EXPECTED_PAGE_TITLE, HOME_PAGE + "The title of the page does not match as expected"); //assert from testng
-		softAssert.assertEquals(actualTitle, EXPECTED_PAGE_TITLE, HOME_PAGE + "The title of the page does not match as expected"); //assert from testng
-		Assert.assertEquals(actualTitle, EXPECTED_PAGE_TITLE, HOME_PAGE + "The title of the page does not match >> ERROR");
+		softAssert.assertEquals(actualTitle, EXPECTED_PAGE_TITLE,
+				HOME_PAGE + "The title of the page does not match as expected"); // assert from testng
+		Assert.assertEquals(actualTitle, EXPECTED_PAGE_TITLE,
+				HOME_PAGE + "The title of the page does not match >> ERROR");
 		String actualArea = HomePageNG.getDepartureArea(driver);
 		System.out.println(HOME_PAGE + "We got until HERE!!");
 		softAssert.assertEquals(actualArea, "France");
 		softAssert.assertAll();
 	}
-	
-	@Test(priority=1)
+
+	@Test(priority = 1)
 	public void verifyWeFindFlights() {
 		driver.get(JALConstants.JAL_HOME_PAGE);
 		defaultHomePageOperations();
 		AvaiPageNG.waitForPage(driver);
 	}
-	
+
 	private void defaultHomePageOperations() {
-		//Close the modal window
+		// Close the modal window
 		HomePageNG.closeModal(driver);
 		// Select Nice as departure city
 		HomePageNG.selectDepartureCity("NCE", driver);
@@ -62,17 +64,17 @@ public class TestBookingNG {
 		HomePageNG.setDepartureDate(departureDate, driver);
 		// Set a return date in 3 months
 		HomePageNG.setReturnDate(departureDate.plusMonths(1), driver);
-		
-		//Continue to the following page
-		HomePageNG.continueToNextPage(driver);		
+
+		// Continue to the following page
+		HomePageNG.continueToNextPage(driver);
 	}
-	
+
 	@AfterTest
 	public void closeTheDriver() {
 		pausa(5); // Only for tuning the test and check the final screen
 		driver.close();
 	}
-	
+
 	private void pausa(int seconds) {
 		try {
 			Thread.sleep(seconds * 1000);
