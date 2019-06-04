@@ -14,7 +14,7 @@ public class MyDriver {
 	private static final String EDGE = "edge";
 	private static final String PATH_FIREFOX_DRIVER = "C:\\GeckoDriver.exe";
 	private static final String PATH_EDGE_DRIVER = "C:\\edgedriver.exe";
-	private static final String PATH_CHROME_DRIVER = "C:\\Users\\formation\\Documents\\ChromeDrivers\\chromedriver.exe";
+	private static final String PATH_CHROME_DRIVER = "C:\\chromedriver_win32\\chromedriver.exe";
 	public static WebDriver driver;
 //	private final String defaultBrowser = "chrome";
 
@@ -33,13 +33,13 @@ public class MyDriver {
 				System.out.println("Loading Edge WebDriver");
 				driver = new EdgeDriver();
 				break;
-				
+
 			case CHROME:
 				System.setProperty("webdriver.chrome.driver", PATH_CHROME_DRIVER);
 				System.out.println("Loading Chrome WebDriver");
 				driver = new ChromeDriver();
 				break;
-				
+
 			default:
 				System.setProperty("webdriver.chrome.driver", PATH_CHROME_DRIVER);
 				System.out.println("Loading Chrome WebDriver");
